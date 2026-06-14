@@ -1,81 +1,65 @@
-# OctoAcme Personas
+# OctoAcme — Additional Personas & Role Clarifications
 
-This document defines typical roles and responsibilities used in OctoAcme project docs and exercises.
+This document adds new personas and expands role descriptions to clarify responsibilities, handoffs, and decision points for OctoAcme projects. Additions are targeted at reducing single-person dependencies, improving release readiness, clarifying testing ownership, and ensuring measurement and security responsibilities are explicit.
 
----
+## New Personas (proposed additions)
 
-## Developers
+- Release Manager
+  - Responsibilities: Coordinate release windows, manage release checklist, own rollback/mitigation plans, ensure staging verification and post-deploy checks.
+  - Authority: Can approve release gating activities in coordination with PM and QA Lead.
+  - Interactions: Works closely with PM, DevOps/Release Engineer, QA Lead, and Product to schedule releases and communicate status. Adds release notes to the project release doc.
 
-### Role Summary
-Developers design, build, test, and deliver software components. They collaborate with product and project leads to implement features that meet acceptance criteria and quality standards.
+- QA Lead / Test Owner
+  - Responsibilities: Define test strategy, own automation and manual test coverage, validate acceptance criteria, sign off on release readiness.
+  - Authority: Can block a release if acceptance criteria or critical tests fail.
+  - Interactions: Partners with Developers for testability, PM for acceptance criteria, and Release Manager for release gating.
 
-### Responsibilities
-- Implement features and fixes to meet acceptance criteria
-- Write and maintain tests and documentation
-- Participate in design and code reviews
-- Assist in estimating and planning work
-- Help identify technical risks and propose mitigations
+- Observability Owner
+  - Responsibilities: Define SLOs/SLIs, create and maintain dashboards and alerts, own incident readiness for the feature area.
+  - Authority: Recommend rollbacks or mitigations based on monitoring signals.
+  - Interactions: Works with Developers, DevOps, and Support to ensure monitoring is in place and meaningful.
 
-### Goals
-- Deliver reliable, maintainable code
-- Reduce cycle time from idea to production
-- Maintain high test coverage and observability
+- Data Analyst / Metrics Owner
+  - Responsibilities: Define success metrics, implement event tracking / instrumentation, analyze post-release impact, and produce a short impact report after releases.
+  - Authority: Influence release decisions through data readiness and metrics completeness.
+  - Interactions: Supports Product Manager with measurement, feeds insights into retrospectives and roadmap decisions.
 
-### Typical Communication
-- Daily standups and sprint planning
-- PR descriptions and code review comments
-- Technical design docs when needed
+- UX Researcher / Design Lead
+  - Responsibilities: Conduct user research, validate UX hypotheses, provide design guidance and acceptance criteria for usability.
+  - Authority: Sign-off on UX acceptance criteria for features with significant user-facing changes.
+  - Interactions: Collaborates with PM and Developers during planning and design handoffs.
 
----
+- Security Liaison
+  - Responsibilities: Review security requirements, perform threat assessments, ensure compliance and coordinate security scans.
+  - Authority: Can require security mitigations before release for high-severity findings.
+  - Interactions: Coordinates with Engineers, DevOps, and Security team; escalates to Product/PM for trade-offs.
 
-## Product Managers
+- Stakeholder Liaison / Communications Owner
+  - Responsibilities: Own external stakeholder updates, coordinate announcements and stakeholder reviews, manage expectations.
+  - Authority: Approve stakeholder communications and timing.
+  - Interactions: Works with PM and Product Lead to align messaging and timelines.
 
-### Role Summary
-Product Managers define what should be built to deliver customer and business value. They own the product vision, prioritize the backlog, and measure outcomes.
+- Delivery Lead / TPM (if applicable)
+  - Responsibilities: Drive cross-team coordination, unblock dependencies, maintain timeline and risk register.
+  - Authority: Prioritize engineering coordination tasks and escalate resource constraints.
+  - Interactions: Engages with PM, Engineers, and other teams to remove blockers and escalate when needed.
 
-### Responsibilities
-- Define problem statements and success metrics
-- Prioritize the roadmap and backlog
-- Collaborate with stakeholders and engineering on trade-offs
-- Validate solutions through user research and metrics
+## How these personas fit with existing roles
 
-### Goals
-- Maximize customer value and impact
-- Make clear, data-driven prioritization decisions
-- Ensure product-market fit and usability
+- PM / PdM: Continue to define priorities and success metrics; partner with Data Analyst, UX Researcher, and Stakeholder Liaison for alignment.
+- Developers: Implement features; work with QA Lead, Observability Owner, and Security Liaison for testing, monitoring, and hardening.
+- QA/Testing: Work under QA Lead; collaborate closely with Developers and Release Manager during gating.
 
-### Typical Communication
-- Weekly alignment with PM and engineering leads
-- Roadmap updates and stakeholder briefings
-- Acceptance criteria and feature specs
+## Implementation guidance
 
----
+- Add a short paragraph per persona in docs/octoacme-roles-and-personas.md under a new section "Additional Personas".
+- For each persona, include: Responsibilities, Authority, Interactions, and an example handoff scenario.
+- Add a template checklist for release gating (docs/release-gating-checklist.md) and a QA handoff checklist (docs/qa-handoff-checklist.md).
 
-## Project Managers
+## Files added/updated in this PR
+- docs/octoacme-roles-and-personas.md (updated)
+- docs/release-gating-checklist.md (new)
+- docs/qa-handoff-checklist.md (new)
 
-### Role Summary
-Project Managers coordinate delivery activities, manage schedules, risks, and communications. They enable the team to deliver on commitments efficiently.
-
-### Responsibilities
-- Create and maintain project plans and timelines
-- Manage risks, dependencies, and resource constraints
-- Facilitate meetings (kickoff, planning, retrospectives)
-- Ensure consistent project documentation and status reporting
-- Coordinate cross-team and stakeholder communication
-
-### Goals
-- Deliver projects on time and within scope
-- Minimize unplanned work and escalations
-- Maintain transparency and alignment across stakeholders
-
-### Typical Communication
-- Weekly status updates and stakeholder reports
-- Risk registers and decision logs
-- Coordination via project boards and meeting facilitation
-
----
-
-## How these personas are used in the exercise
-- Use these persona definitions to frame scenarios and sample interactions in the Skills Exercise.
-- Each persona can be used as a persona prompt for Copilot Spaces to shape role-specific guidance.
-
+## Rationale
+These updates address documented gaps: unclear release ownership, inconsistent QA sign-off, missing metrics ownership, and untracked security responsibilities. Standardizing these will improve release predictability and reduce escalations.
